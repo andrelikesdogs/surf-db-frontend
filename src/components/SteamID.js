@@ -12,7 +12,7 @@ const SteamID = ({ id, format = FORMATS.STEAMID_2 }) => {
   useEffect(() => {
     let steamIdInstance;
     try {
-      steamIdInstance = new steamId(id);
+      steamIdInstance = new steamId(decodeURIComponent(id.trim()));
       console.log(id);
       setValue(steamIdInstance[format]());
     } catch (err) {

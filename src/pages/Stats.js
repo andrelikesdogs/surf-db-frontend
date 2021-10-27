@@ -167,9 +167,9 @@ const Stats = ({
             Your Completions
           </Typography>
           {loading && <Skeleton variant="rectangular" height={200}></Skeleton>}
-          {!loading && data.GetUserStats == null && (
+          {!loading && data?.GetUserStats == null && (
             <Alert severity="error">
-              Unfortunately, we couldn't fetch your completions. {error}
+              Unfortunately, we couldn't fetch your completions. {error.message}
             </Alert>
           )}
           <TimesTable
@@ -190,7 +190,7 @@ const Stats = ({
             Your Records
           </Typography>
           {loading && <Skeleton variant="rectangular" height={200}></Skeleton>}
-          {!loading && data.GetUserStats == null && (
+          {!loading && data?.GetUserStats == null && (
             <Alert severity="error">
               Unfortunately, we couldn't fetch your records.
             </Alert>

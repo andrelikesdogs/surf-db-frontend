@@ -43,15 +43,16 @@ const TimesTable = ({ times, loading, error, noResult = "No results :(" }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {times.map((time) => (
-            <TableRow key={makeKey(time)}>
-              <TableCell>{time.map.mapname}</TableCell>
-              <TableCell>{formatRun(time.run.runid)}</TableCell>
-              <TableCell>{time.recdate}</TableCell>
-              <TableCell>{time.rank}</TableCell>
-              <TableCell>{formatTimeFromSeconds(time.rectime)}</TableCell>
-            </TableRow>
-          ))}
+          {times &&
+            times.map((time) => (
+              <TableRow key={makeKey(time)}>
+                <TableCell>{time.map.mapname}</TableCell>
+                <TableCell>{formatRun(time.run.runid)}</TableCell>
+                <TableCell>{time.recdate}</TableCell>
+                <TableCell>{time.rank}</TableCell>
+                <TableCell>{formatTimeFromSeconds(time.rectime)}</TableCell>
+              </TableRow>
+            ))}
           {times != null && times.length === 0 && (
             <TableRow>
               <TableCell colSpan={5} height={30} align="center">
