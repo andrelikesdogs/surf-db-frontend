@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server"
+    "dev": "./node_modules/.bin/webpack-dev-server",
+    "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack"
   },
   "browserslist": {
     "production": [
@@ -30,6 +31,7 @@
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.4",
     "axios": "^0.23.0",
+    "cross-env": "^7.0.3",
     "graphql": "^15.6.1",
     "html-webpack-plugin": "^5.4.0",
     "react": "^17.0.2",
