@@ -7,18 +7,7 @@
     "dev": "./node_modules/.bin/webpack-dev-server",
     "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": "> 0.25%, not dead",
   "keywords": [],
   "author": "",
   "license": "ISC",
