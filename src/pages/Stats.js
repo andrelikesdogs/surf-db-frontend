@@ -22,18 +22,9 @@ import SteamID from "../components/SteamID";
 
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
-
-const makeKey = (completion) =>
-  `${completion.mapid}-${completion.runid}-${completion.recdate}-${completion.rectime}`;
-
-const StatsTable = styled(Table)`
-  thead tr {
-    background-color: #010101;
-  }
-  tbody tr {
-    background-color: #2f2f2f;
-  }
-`;
+import { formatTimeFromSeconds } from "../utils/formatTime";
+import { formatRunID } from "../utils/formats";
+import TimesTable from "../components/TimesTable";
 
 const USER_STATS_QUERY = gql`
   query UserStatsQuery($steamId: ID!) {
@@ -57,6 +48,9 @@ const USER_STATS_QUERY = gql`
           descriptionid
           game
         }
+        run {
+          runid
+        }
         mode
         style
         rank
@@ -73,6 +67,9 @@ const USER_STATS_QUERY = gql`
           mapid
           descriptionid
           game
+        }
+        run {
+          runid
         }
         mode
         style
@@ -164,7 +161,7 @@ const Stats = ({
           </Grid>
         </Paper>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} xl={6}>
         <Paper sx={{ px: 4, py: 2 }}>
           <Typography variant="h5" sx={{ mb: 2 }}>
             Your Completions
@@ -175,33 +172,19 @@ const Stats = ({
               Unfortunately, we couldn't fetch your completions. {error}
             </Alert>
           )}
-          {!loading && data.GetUserStats != null && (
-            <TableContainer component={Paper}>
-              <StatsTable>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Map</TableCell>
-                    <TableCell>Recorded Date</TableCell>
-                    <TableCell>Rank</TableCell>
-                    <TableCell>Finish Time</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data.GetUserStats.completed.map((completion) => (
-                    <TableRow key={makeKey(completion)}>
-                      <TableCell>{completion.map.mapname}</TableCell>
-                      <TableCell>{completion.recdate}</TableCell>
-                      <TableCell>{completion.rank}</TableCell>
-                      <TableCell>{completion.rectime}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </StatsTable>
-            </TableContainer>
-          )}
+          <TimesTable
+            times={data?.GetUserStats?.completed}
+            loading={loading}
+            error={error}
+            noResult={
+              <Typography variant="body3">
+                You haven't completed a map yet
+              </Typography>
+            }
+          />
         </Paper>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} xl={6}>
         <Paper sx={{ px: 4, py: 2 }}>
           <Typography variant="h5" sx={{ mb: 2 }}>
             Your Records
@@ -212,28 +195,16 @@ const Stats = ({
               Unfortunately, we couldn't fetch your records.
             </Alert>
           )}
-          {!loading && data.GetUserStats != null && (
-            <TableContainer component={Paper}>
-              <StatsTable>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Map</TableCell>
-                    <TableCell>Recorded Date</TableCell>
-                    <TableCell>Finish Time</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data.GetUserStats.records.map((record) => (
-                    <TableRow key={makeKey(record)}>
-                      <TableCell>{record.map.mapname}</TableCell>
-                      <TableCell>{record.recdate}</TableCell>
-                      <TableCell>{record.rectime}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </StatsTable>
-            </TableContainer>
-          )}
+          <TimesTable
+            times={data?.GetUserStats?.records}
+            loading={loading}
+            error={error}
+            noResult={
+              <Typography variant="body3">
+                You hold no server records at the moment
+              </Typography>
+            }
+          />
         </Paper>
       </Grid>
     </Grid>
