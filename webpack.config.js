@@ -14,6 +14,9 @@ module.exports = {
       "/graphql": {
         target: "http://localhost:8080/",
       },
+      "/auth": {
+        target: "http://localhost:8080/",
+      },
     },
   },
   resolve: {

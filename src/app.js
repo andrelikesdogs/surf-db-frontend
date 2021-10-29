@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Stats from "./pages/Stats";
+import MapOverview from "./pages/MapOverview";
+import MapDetails from "./pages/MapDetails";
 
 import {
   ApolloClient,
@@ -24,15 +26,17 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <NavBar />
-      <Box sx={{ paddingTop: 5, px: 5 }}>
-        <Router>
+      <Router>
+        <NavBar />
+        <Box sx={{ paddingTop: 5, px: 5 }}>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/stats/:steamId" component={Stats} />
+            <Route path="/maps" component={MapOverview} />
+            <Route path="/maps/:name" component={MapDetails} />
           </Switch>
-        </Router>
-      </Box>
+        </Box>
+      </Router>
     </ApolloProvider>
   );
 };

@@ -49,7 +49,9 @@ const TimesTable = ({ times, loading, error, noResult = "No results :(" }) => {
                 <TableCell>{time.map.mapname}</TableCell>
                 <TableCell>{formatRun(time.run.runid)}</TableCell>
                 <TableCell>{time.recdate}</TableCell>
-                <TableCell>{time.rank}</TableCell>
+                <TableCell>
+                  {time.rank}/{time.rankcount}
+                </TableCell>
                 <TableCell>{formatTimeFromSeconds(time.rectime)}</TableCell>
               </TableRow>
             ))}

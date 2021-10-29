@@ -54,6 +54,7 @@ const USER_STATS_QUERY = gql`
         mode
         style
         rank
+        rankcount
         rectime
         recdate
         jumpnum
@@ -74,6 +75,7 @@ const USER_STATS_QUERY = gql`
         mode
         style
         rank
+        rankcount
         rectime
         recdate
         jumpnum
